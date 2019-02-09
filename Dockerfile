@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.9
 
 ARG GLIBC_VER="2.28-r0"
 ARG BUILD_DATE
