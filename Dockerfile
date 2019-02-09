@@ -10,7 +10,7 @@ LABEL description="glibc on alpine" \
 
 ENV GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" \
     GLIBC_BASE_PACKAGE="glibc-$GLIBC_VER.apk" \
-    GLIBC_BIN_PACKAGE="glibc-bin-$GLIBC_VER.apk" 
+    GLIBC_BIN_PACKAGE="glibc-bin-$GLIBC_VER.apk"
 
 RUN apk add --no-cache --upgrade --virtual=.build_deps wget \
                                              ca-certificates \
@@ -20,7 +20,9 @@ RUN apk add --no-cache --upgrade --virtual=.build_deps wget \
     && apk add --no-cache \
                     "$GLIBC_BASE_PACKAGE" \
                     "$GLIBC_BIN_PACKAGE" \
+                    su-exec \
+                    s6 \
     && apk del --no-cache .build_deps \
     && rm -f "$GLIBC_BASE_PACKAGE" \
              "$GLIBC_BIN_PACKAGE" \
-             /etc/apk/keys/sgerrand.rsa.pub 
+             /etc/apk/keys/sgerrand.rsa.pub
